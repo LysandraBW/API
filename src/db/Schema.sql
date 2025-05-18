@@ -1,0 +1,17 @@
+USE Waltronics;
+GO
+
+CREATE SCHEMA Info;
+GO
+
+CREATE SCHEMA Employee;
+GO
+
+CREATE SCHEMA Customer;
+GO
+
+CREATE SCHEMA Appointment;
+GO
+
+CREATE SCHEMA Session;
+GO

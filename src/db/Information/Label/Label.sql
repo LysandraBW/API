@@ -1,0 +1,14 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Info.Label;
+
+CREATE TABLE Info.Label (
+	LabelID	INT	IDENTITY (1,1),
+	Label	VARCHAR(15) UNIQUE,
+	PRIMARY KEY (LabelID)
+);
+
+INSERT INTO Info.Label VALUES ('Seen');
+INSERT INTO Info.Label VALUES ('Flag');
+INSERT INTO Info.Label VALUES ('Star');

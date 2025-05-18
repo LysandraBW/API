@@ -1,0 +1,14 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Employee.Event;
+
+CREATE TABLE Employee.Event (
+	EventID		INT					NOT NULL IDENTITY (1,1),
+	EmployeeID	UNIQUEIDENTIFIER	NOT NULL,
+	Name		VARCHAR(100)		NOT NULL,
+	Date		DATETIME2,
+	Summary		VARCHAR(500),
+	PRIMARY KEY (EventID),
+	FOREIGN KEY (EmployeeID) REFERENCES Employee.Employee (EmployeeID) ON DELETE CASCADE
+);

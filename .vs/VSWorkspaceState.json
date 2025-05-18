@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\db",
+    "\\src\\db\\Appointment",
+    "\\src\\db\\Appointment\\Base",
+    "\\src\\db\\Appointment\\Base\\Lookup",
+    "\\src\\db\\Appointment\\Base\\Select",
+    "\\src\\db\\Appointment\\Base\\Select\\All",
+    "\\src\\db\\Role",
+    "\\src\\db\\Session"
+  ],
+  "SelectedNode": "\\src\\db\\Appointment\\Base\\Select\\Protected\\SelectProtected.sql",
+  "PreviewInSolutionExplorer": false
+}

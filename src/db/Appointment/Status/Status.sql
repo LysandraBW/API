@@ -1,0 +1,11 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Appointment.Status;
+
+CREATE TABLE Appointment.Status (
+	AppointmentID	UNIQUEIDENTIFIER NOT NULL,
+	StatusID		INT	NOT NULL,
+	PRIMARY KEY (AppointmentID),
+	FOREIGN KEY (StatusID) REFERENCES Info.Status (StatusID) ON DELETE CASCADE
+);

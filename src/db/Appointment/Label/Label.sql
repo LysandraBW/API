@@ -1,0 +1,15 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Appointment.Label;
+
+CREATE TABLE Appointment.Label (
+	AppointmentID	UNIQUEIDENTIFIER NOT NULL,
+	EmployeeID		UNIQUEIDENTIFIER NOT NULL,
+	LabelID			INT	NOT NULL,
+	Value			BIT DEFAULT 0 NOT NULL,
+	PRIMARY KEY (AppointmentID, EmployeeID, LabelID),
+	FOREIGN KEY (AppointmentID) REFERENCES Appointment.ID (AppointmentID) ON DELETE CASCADE,
+	FOREIGN KEY (EmployeeID) REFERENCES Employee.Employee (EmployeeID) ON DELETE CASCADE,
+	FOREIGN KEY (LabelID) REFERENCES Info.Label (LabelID) ON DELETE CASCADE
+);

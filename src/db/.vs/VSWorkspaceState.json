@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Appointment",
+    "\\Appointment\\Appointment\\Select\\Protected",
+    "\\Appointment\\Label\\Select",
+    "\\Appointment\\Label\\Select\\All",
+    "\\Appointment\\Label\\Update",
+    "\\Appointment\\Note",
+    "\\Appointment\\Note\\Shared",
+    "\\Appointment\\Note\\Shared\\Delete",
+    "\\Appointment\\Note\\Shared\\Insert",
+    "\\Appointment\\Note\\Shared\\Select"
+  ],
+  "SelectedNode": "\\Appointment\\Note\\Attachment\\Insert\\Insert.sql",
+  "PreviewInSolutionExplorer": false
+}

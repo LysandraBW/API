@@ -1,0 +1,12 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Appointment.Repair;
+
+CREATE TABLE Appointment.Repair (
+	RepairID		INT					NOT NULL IDENTITY (1, 1),
+	AppointmentID	UNIQUEIDENTIFIER	NOT NULL,
+	Repair			VARCHAR(500)		NOT NULL,
+	PRIMARY KEY (RepairID),
+	FOREIGN KEY (AppointmentID) REFERENCES Appointment.ID (AppointmentID) ON DELETE CASCADE
+);

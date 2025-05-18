@@ -1,0 +1,19 @@
+USE WALTRONICS;
+GO
+
+DROP TABLE Appointment.Note;
+
+CREATE TABLE Appointment.Note (
+	NoteID			INT					NOT NULL IDENTITY (1,1),
+	EmployeeID		UNIQUEIDENTIFIER	NOT NULL,
+	AppointmentID	UNIQUEIDENTIFIER	NOT NULL,
+	Head			VARCHAR(100)		NOT NULL,
+	Body			VARCHAR(500)		NOT NULL,
+	ShowCustomer	BIT DEFAULT 0		NOT NULL,
+	CreationDate	DATETIME			NOT NULL,
+	UpdationDate	DATETIME			NOT NULL,
+	CHECK (CreationDate <= UpdationDate),
+	PRIMARY KEY (NoteID),
+	FOREIGN KEY (EmployeeID) REFERENCES Employee.Employee (EmployeeID) ON DELETE CASCADE,
+	FOREIGN KEY (AppointmentID) REFERENCES Appointment.ID (AppointmentID) ON DELETE CASCADE
+);
