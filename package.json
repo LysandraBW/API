@@ -4,7 +4,7 @@
   "description": "An API for Waltronics",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/server.ts",
+    "start": "ts-node -r tsconfig-paths/register src/server.ts --poll",
     "build": "tsc",
     "serve": "node dist/index.js"
   },

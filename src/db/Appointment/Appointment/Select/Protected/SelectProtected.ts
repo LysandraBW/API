@@ -33,4 +33,5 @@ export const TestSelectProtectedAppointment = z.object({
     ...appointmentTest,
     role: z.string().refine(s => [APPOINTMENT_HOLDER, EMPLOYEE].indexOf(s) !== -1)
 });
+
 export const SelectProtectedAppointment = buildProcedure(TestSelectProtectedAppointment, ExecuteSelectProtectedAppointment);

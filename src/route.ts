@@ -10,8 +10,10 @@ async function assembleCookies(req: Request, cookieNames?: Array<[string]|[strin
     for (const cookieName of cookieNames) {
         const cookieKey = cookieName[cookieName.length - 1];
         const cookieValue = await getCookie(req, cookieName[0]);
-        if (cookieValue === null)
+        if (cookieValue === null) {
+            console.log("No Cookie w/ Name: ", cookieName[0]);
             continue;
+        }
         cookies[cookieKey] = cookieValue;
     }
     return cookies;
@@ -24,13 +26,17 @@ export interface Options {
 
 export async function route(req: Request, res: Response, procedure: Procedure, options: Options) {
     const cookies = await assembleCookies(req, options.cookieNames);
+    console.log("Cookies: ", cookies);
+    console.log("Cookie Names: ", options.cookieNames);
     const input = procedure.Test({...cookies, ...(options.data || {})});
     // Send Error
     if (!input.success) {
+        console.log("E", input.error);
         res.status(400).send(INVALID_BODY);
         return;
     }
     // Send Output
+    console.log("F");
     const output = await procedure.Execute(input.data);
     res.send({output});
 };

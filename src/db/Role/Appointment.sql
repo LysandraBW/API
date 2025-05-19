@@ -17,6 +17,10 @@ ON		Appointment.GetSummary
 TO		AppointmentHolder;
 
 GRANT	EXEC
+ON		Appointment.GetProtected
+TO		AppointmentHolder;
+
+GRANT	EXEC
 ON		Appointment.GetCustomerNotes
 TO		AppointmentHolder;
 
@@ -24,5 +28,5 @@ GRANT	EXEC
 ON		Schema::Info
 TO		AppointmentHolder;
 
---ALTER ROLE Customer
---ADD MEMBER User_Customer;
+ALTER ROLE AppointmentHolder
+ADD MEMBER User_Appointment_Holder;

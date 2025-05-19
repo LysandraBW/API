@@ -16,15 +16,10 @@ GRANT	EXEC
 ON		Schema::Info
 TO		Standard;
 
--- Why should standard users have access to this functionality?
--- Wouldn't this allow adversaries to add a bunch of defined services for an appointment?
--- GRANT	EXEC
--- ON		Appointment.InsertAppointment
--- TO	 	Standard;
+GRANT	EXEC
+ON		Appointment.Lookup
+TO		Standard;
 
--- GRANT	EXEC
--- ON		Appointment.InsertDefinedService
--- TO		Standard;
 GRANT	EXEC
 ON		Schema::Session
 TO		Standard;
