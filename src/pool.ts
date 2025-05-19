@@ -63,8 +63,8 @@ export const getEmployeePool = async (sessionID: string) => {
 
 export const getAppointmentHolderPool = async (sessionID: string) => {
     if (!(await authenticate(sessionID, APPOINTMENT_HOLDER)))
-        return AppointmentHolderPool;
-    return EmployeePool;
+        return StandardPool;
+    return AppointmentHolderPool;
 }
 
 // These will be commented out as the naming created ambiguity.

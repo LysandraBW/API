@@ -70,12 +70,12 @@ import { SelectInfoServices } from "./db/Information/Service/Select";
 import { SelectInfoLabels } from "./db/Information/Label/Select";
 import { route, routeCRUD } from "./route";
 import { APPOINTMENT_HOLDER, EMPLOYEE } from './constant';
-import { AuthorizeLookup } from "./db/Appointment/Appointment/Lookup/Lookup";
+import { Lookup } from "./db/Appointment/Appointment/Lookup/Lookup";
 
 const app = express();
-app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: "*", credentials: true}));
+app.use(express.json());
+app.use(cors({origin: "http://127.0.0.1:3000", credentials: true}));
 
 const port = 8080;
 app.listen(port, () => console.log("Server Listening on Port: " + port));
@@ -89,7 +89,9 @@ app.get("/appointments", async (req, res) => {
 });
 
 app.get("/appointment/:appointmentID", async (req, res) => {
+    console.log("A")
     if (req.query.type === PROTECTED) {
+        console.log("B");
         route(req, res, SelectProtectedAppointment, {
             data: <Data> {
                 appointmentID: req.params.appointmentID,
@@ -102,6 +104,7 @@ app.get("/appointment/:appointmentID", async (req, res) => {
         });
     }
     else {
+        console.log("C");
         route(req, res, SelectAppointment, {
             data: <Data>  {
                 appointmentID: req.params.appointmentID
@@ -109,6 +112,7 @@ app.get("/appointment/:appointmentID", async (req, res) => {
             cookieNames: [["EmployeeSessionID", "sessionID"]]
         });
     }
+    console.log("D");
 });
 
 app.put("/appointment", async (req, res) => {
@@ -183,19 +187,20 @@ app.post("/appointment/:appointmentID/customer", authenticateEmployee, async (re
 });
 
 app.post("/appointment/lookup", async (req, res) => {
-    const input = AuthorizeLookup.Test(req.body);
-    // Invalid Inputs (i.e. Wrong Email Address)
+    const input = Lookup.Test(req.body);
+    // Invalid Inputs (e.g. Wrong Email Address)
     if (!input.success) {
         res.status(400).send(INVALID_BODY);
         return;
     }
     // Invalid Email Address and Appointment ID
-    const output = await AuthorizeLookup.Execute(input.data);
+    const output = await Lookup.Execute(input.data);
     if (!output) {
         res.status(400).send(INVALID_LOGIN);
         return;
     }
-    setCookie(res, {data: output, name: "AppointmentHolderSessionID"});
+    console.log("Setting Cookie: ", output);
+    await setCookie(res, {data: output, name: "AppointmentHolderSessionID"});
     res.send({output});
 });
 

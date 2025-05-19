@@ -2,16 +2,18 @@
   "ExpandedNodes": [
     "",
     "\\Appointment",
-    "\\Appointment\\Appointment\\Select\\Protected",
-    "\\Appointment\\Label\\Select",
-    "\\Appointment\\Label\\Select\\All",
-    "\\Appointment\\Label\\Update",
+    "\\Appointment\\Appointment",
+    "\\Appointment\\Appointment\\Lookup",
+    "\\Appointment\\Appointment\\Select",
     "\\Appointment\\Note",
-    "\\Appointment\\Note\\Shared",
-    "\\Appointment\\Note\\Shared\\Delete",
-    "\\Appointment\\Note\\Shared\\Insert",
-    "\\Appointment\\Note\\Shared\\Select"
+    "\\Appointment\\Note\\Attachment",
+    "\\Appointment\\Note\\Attachment\\Insert",
+    "\\Employee",
+    "\\Employee\\Login",
+    "\\Employee\\Login\\Login",
+    "\\Role",
+    "\\Session"
   ],
-  "SelectedNode": "\\Appointment\\Note\\Attachment\\Insert\\Insert.sql",
+  "SelectedNode": "\\Role\\Appointment.sql",
   "PreviewInSolutionExplorer": false
 }
