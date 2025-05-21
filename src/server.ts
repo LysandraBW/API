@@ -71,6 +71,7 @@ import { SelectInfoLabels } from "./db/Information/Label/Select";
 import { route, routeCRUD } from "./route";
 import { APPOINTMENT_HOLDER, EMPLOYEE } from './constant';
 import { Lookup } from "./db/Appointment/Appointment/Lookup/Lookup";
+import { SelectEmployeeNames } from "./db/Employee/Employee/Select/All/SelectAll";
 
 const app = express();
 app.use(cookieParser());
@@ -89,9 +90,7 @@ app.get("/appointments", async (req, res) => {
 });
 
 app.get("/appointment/:appointmentID", async (req, res) => {
-    console.log("A")
     if (req.query.type === PROTECTED) {
-        console.log("B");
         route(req, res, SelectProtectedAppointment, {
             data: <Data> {
                 appointmentID: req.params.appointmentID,
@@ -104,7 +103,6 @@ app.get("/appointment/:appointmentID", async (req, res) => {
         });
     }
     else {
-        console.log("C");
         route(req, res, SelectAppointment, {
             data: <Data>  {
                 appointmentID: req.params.appointmentID
@@ -112,7 +110,6 @@ app.get("/appointment/:appointmentID", async (req, res) => {
             cookieNames: [["EmployeeSessionID", "sessionID"]]
         });
     }
-    console.log("D");
 });
 
 app.put("/appointment", async (req, res) => {
@@ -199,7 +196,6 @@ app.post("/appointment/lookup", async (req, res) => {
         res.status(400).send(INVALID_LOGIN);
         return;
     }
-    console.log("Setting Cookie: ", output);
     await setCookie(res, {data: output, name: "AppointmentHolderSessionID"});
     res.send({output});
 });
@@ -377,7 +373,7 @@ app.post("/employee/logout", async (req, res) => {
 
 app.get("/employee", authenticateEmployee, async (req, res) => {
     if (req.query.type === NAMES)
-        routeCRUD(req, res, SelectEmployeeNotes);
+        routeCRUD(req, res, SelectEmployeeNames);
     else
         routeCRUD(req, res, SelectEmployee);
 });
