@@ -6,14 +6,14 @@ export const UNDEFINED_POOL = JSON.stringify({"error": "Failed to Connect"});
 export const ALL = "All";
 export const PROTECTED = "Protected";
 
-export const RECOVER = "recover";
-export const MULTIPLE = "multiple";
-export const TEMPORARY = "temporary";
-export const PERMANENT = "permanent";
-export const DEFINED = "defined";
-export const DIGITAL = "digital";
-export const CREDIT_CARD = "creditCard";
-export const NAMES = "names";
+export const RECOVER = "Recover";
+export const MULTIPLE = "Mmultiple";
+export const TEMPORARY = "Temporary";
+export const PERMANENT = "Permanent";
+export const DEFINED = "Defined";
+export const DIGITAL = "Digital";
+export const CREDIT_CARD = "CreditCard";
+export const NAMES = "Names";
 
 // Roles
 export const EMPLOYEE = "Employee";

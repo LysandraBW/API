@@ -39,7 +39,7 @@ BEGIN
 			SELECT	ID
 			FROM	Session.Session
 			WHERE	SessionID = @SessionID AND		
-					Role = 'EMPLOYEE'
+					Role = 'Employee'
 		);
 
 		IF (@EmployeeID IS NULL)

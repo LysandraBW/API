@@ -36,9 +36,14 @@ export async function route(req: Request, res: Response, procedure: Procedure, o
     res.send({output});
 };
 
-export async function routeCRUD(req: Request, res: Response, procedure: Procedure) {
+export async function routeCRUD(req: Request, res: Response, procedure: Procedure, includeQueries: boolean = false) {
     const sessionID = await getCookie(req, "EmployeeSessionID");
-    const input = procedure.Test({sessionID, ...req.params, ...req.body});
+    let input = {sessionID, ...req.params, ...req.body};
+    console.log(input);
+    if (includeQueries)
+        input = {...input, ...req.query}
+    input = procedure.Test(input);
+
     // Send Error
     if (!input.success) {
         res.status(400).send(INVALID_BODY);

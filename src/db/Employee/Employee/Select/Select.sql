@@ -1,10 +1,10 @@
 USE WALTRONICS;
 GO
 
-DROP PROCEDURE Employee.Get;
-GO
+--DROP PROCEDURE Employee.Get;
+--GO
 
-CREATE PROCEDURE Employee.Get (
+ALTER PROCEDURE Employee.Get (
 	@SessionID	CHAR(36)
 )
 AS
@@ -17,7 +17,7 @@ BEGIN
 	EXEC	Session.Authenticate
 			'Employee',
 			@SessionID,
-			@EmployeeID;
+			@EmployeeID OUTPUT;
 
 	SELECT	Employee.Employee.EmployeeID,
 			Employee.Employee.FName,

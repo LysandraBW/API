@@ -1,12 +1,12 @@
 USE WALTRONICS;
 GO
 
-DROP PROCEDURE Employee.GetNames;
-GO
+-- DROP PROCEDURE Employee.GetNames;
+-- GO
 
-CREATE PROCEDURE Employee.GetNames (
+ALTER PROCEDURE Employee.GetNames (
 	@SessionID	CHAR(36),
-	@IncludeMe	BIT
+	@IncludeMe	BIT = 1
 )
 AS
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
 	EXEC	Session.Authenticate
 			'Employee',
 			@SessionID,
-			@EmployeeID;
+			@EmployeeID OUTPUT;
 
 
 	SELECT	DISTINCT
