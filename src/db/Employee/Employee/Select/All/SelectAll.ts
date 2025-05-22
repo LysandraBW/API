@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { isUUID } from "@/validate";
+import { isBit, isUUID } from "@/validate";
 import { EmployeeFullName } from "waltronics-types";
 
 export async function ExecuteSelectAllEmployeeFullNames(data: Data): Promise<Array<EmployeeFullName>> {
@@ -14,7 +14,7 @@ export async function ExecuteSelectAllEmployeeFullNames(data: Data): Promise<Arr
 
         const output = await pool.request()
             .input("SessionID", sql.Char(36), data.sessionID)
-            .input("IncludeMe", sql.Bit, 0)
+            .input("IncludeMe", sql.Bit, parseInt(data.includeMe))
             .execute("Employee.GetNames");
         
         return output.recordset;
@@ -24,5 +24,5 @@ export async function ExecuteSelectAllEmployeeFullNames(data: Data): Promise<Arr
         return [];
     }
 }
-export const TestSelectEmployeeNames = z.object({sessionID: isUUID});
+export const TestSelectEmployeeNames = z.object({sessionID: isUUID, includeMe: isBit});
 export const SelectEmployeeNames = buildProcedure(TestSelectEmployeeNames, ExecuteSelectAllEmployeeFullNames);

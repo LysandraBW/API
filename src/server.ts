@@ -373,7 +373,7 @@ app.post("/employee/logout", async (req, res) => {
 
 app.get("/employee", authenticateEmployee, async (req, res) => {
     if (req.query.type === NAMES)
-        routeCRUD(req, res, SelectEmployeeNames);
+        routeCRUD(req, res, SelectEmployeeNames, true);
     else
         routeCRUD(req, res, SelectEmployee);
 });
