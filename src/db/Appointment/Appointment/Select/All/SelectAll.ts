@@ -15,7 +15,14 @@ export async function ExecuteSelectAllAppointments(data: Data): Promise<Appointm
             throw UNDEFINED_POOL;
 
         const output = await pool.request()
-            .input("SessionID", sql.Char(36), data.sessionID)       
+            .input("SessionID", sql.Char(36), data.sessionID)
+            // .input("PageNumber", sql.Int, data.pageNumber)
+            // .input("PageSize", sql.Int, data.pageSize)
+            // .input("LookAhead", sql.Int, data.lookAhead)
+            .input("Search", sql.VarChar(320), data.search)
+            .input("Deleted", sql.Bit, parseInt(data.deleted))
+            .input("LabelID", sql.Int, data.labelID)
+            .input("StatusID", sql.Int, data.statusID)
             .execute("Appointment.GetAll");
 
         const recordsets: any = output.recordsets;
@@ -26,7 +33,7 @@ export async function ExecuteSelectAllAppointments(data: Data): Promise<Appointm
         // we did in selectAppointment, but on the scale
         // of thousands of appointments.
         const labels: Array<Label> = recordsets[2];
-        const sortedLabels = structureTwo(labels, "AppointmentID", "LabelID");
+        const sortedLabels = structureTwo(labels, "AppointmentID", "Label");
         for (const appointment of recordsets[0])
             appointment.Labels = sortedLabels[appointment.AppointmentID];
         
@@ -52,7 +59,7 @@ export const TestSelectAllAppointments = z.object({
     search: z.string().max(320).optional(),
     deleted: isBit.optional(),
     labelID: isInteger.optional(),
-    statusID: isInteger.optional(),
+    statusID: isInteger.or(z.string().refine(s => s === "")),
     fName: isBit.optional(),
     lName: isBit.optional(),
     make: isBit.optional(),

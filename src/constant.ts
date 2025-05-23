@@ -7,7 +7,7 @@ export const ALL = "All";
 export const PROTECTED = "Protected";
 
 export const RECOVER = "Recover";
-export const MULTIPLE = "Mmultiple";
+export const MULTIPLE = "Multiple";
 export const TEMPORARY = "Temporary";
 export const PERMANENT = "Permanent";
 export const DEFINED = "Defined";

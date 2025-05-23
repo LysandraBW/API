@@ -3,17 +3,18 @@
     "",
     "\\Appointment",
     "\\Appointment\\Appointment",
-    "\\Appointment\\Appointment\\Lookup",
     "\\Appointment\\Appointment\\Select",
-    "\\Appointment\\Note",
-    "\\Appointment\\Note\\Attachment",
-    "\\Appointment\\Note\\Attachment\\Insert",
+    "\\Appointment\\Appointment\\Select\\All",
+    "\\Appointment\\Label",
+    "\\Appointment\\Label\\Select",
+    "\\Appointment\\Label\\Select\\All",
+    "\\Appointment\\Label\\Update",
     "\\Employee",
-    "\\Employee\\Login",
-    "\\Employee\\Login\\Login",
-    "\\Role",
-    "\\Session"
+    "\\Employee\\Employee",
+    "\\Employee\\Employee\\Select",
+    "\\Employee\\Employee\\Select\\All",
+    "\\Role"
   ],
-  "SelectedNode": "\\Role\\Appointment.sql",
+  "SelectedNode": "\\Appointment\\Label\\Select\\Select.sql",
   "PreviewInSolutionExplorer": false
 }
