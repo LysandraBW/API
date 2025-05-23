@@ -1,10 +1,10 @@
 USE WALTRONICS;
 GO
 
-DROP PROCEDURE Appointment.GetLabels;
-GO
+-- DROP PROCEDURE Appointment.GetLabels;
+-- GO
 
-CREATE PROCEDURE Appointment.GetLabels (
+ALTER PROCEDURE Appointment.GetLabels (
 	@SessionID		UNIQUEIDENTIFIER,
 	@AppointmentID	UNIQUEIDENTIFIER
 )

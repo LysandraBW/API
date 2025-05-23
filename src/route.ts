@@ -28,6 +28,7 @@ export async function route(req: Request, res: Response, procedure: Procedure, o
     const input = procedure.Test({...cookies, ...(options.data || {})});
     // Send Error
     if (!input.success) {
+        console.log(input.error);
         res.status(400).send(INVALID_BODY);
         return;
     }
@@ -46,6 +47,7 @@ export async function routeCRUD(req: Request, res: Response, procedure: Procedur
 
     // Send Error
     if (!input.success) {
+        console.log(input.error);
         res.status(400).send(INVALID_BODY);
         return;
     }
