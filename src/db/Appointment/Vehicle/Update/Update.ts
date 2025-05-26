@@ -30,12 +30,12 @@ export async function ExecuteUpdateVehicle(data: Data) {
 
 export const TestUpdateVehicle = z.object({
     ...appointmentTest,
-    make: z.string().max(50).or(z.null()),
-    model: z.string().max(50).or(z.null()),
-    modelYear: z.string().or(z.null()),
-    vin: isVIN.or(z.null()),
-    mileage: z.string().or(z.null()),
-    licensePlate: z.string().max(8).or(z.null())
+    make: z.string().max(50).or(z.null()).optional(),
+    model: z.string().max(50).or(z.null()).optional(),
+    modelYear: z.string().or(z.null()).optional(),
+    vin: isVIN.or(z.null()).optional(),
+    mileage: z.string().or(z.null()).optional(),
+    licensePlate: z.string().max(8).or(z.null()).optional()
 });
 
 export const UpdateVehicle = buildProcedure(TestUpdateVehicle, ExecuteUpdateVehicle);

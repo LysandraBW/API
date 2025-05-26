@@ -1,10 +1,10 @@
 USE WALTRONICS;
 GO
 
-DROP PROCEDURE Employee.GetEvents;
-GO
+-- DROP PROCEDURE Employee.GetEvents;
+-- GO
 
-CREATE PROCEDURE Employee.GetEvents (
+ALTER PROCEDURE Employee.GetEvents (
 	@SessionID CHAR(36)
 )
 AS
@@ -50,8 +50,8 @@ BEGIN
 	SELECT	Employee.Event.EventID,
 			Employee.Event.EmployeeID,
 			Employee.Event.Date,
-			Employee.Event.Name,
 			Employee.Event.Summary,
+			Employee.Event.Name,
 			CAST(NULL AS UNIQUEIDENTIFIER) AS AppointmentID
 	FROM	Employee.Event
 	WHERE	Employee.Event.EmployeeID = @SessionEmployeeID
@@ -59,8 +59,8 @@ BEGIN
 	SELECT	Employee.Event.EventID,
 			Employee.Event.EmployeeID,
 			Employee.Event.Date,
-			Employee.Event.Name,
 			Employee.Event.Summary,
+			Employee.Event.Name,
 			CAST(NULL AS UNIQUEIDENTIFIER) AS AppointmentID
 	FROM	Employee.Event
 	JOIN	Employee.SharedEvent ON Employee.Event.EventID = Employee.SharedEvent.EventID

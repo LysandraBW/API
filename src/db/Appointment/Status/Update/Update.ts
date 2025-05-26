@@ -23,5 +23,5 @@ export async function ExecuteUpdateStatus(data: Data) {
         return false;
     }
 }
-export const TestUpdateStatus = z.object({...appointmentTest, statusID: isInteger.optional()});
+export const TestUpdateStatus = z.object({...appointmentTest, statusID: isInteger.or(z.null()).optional()});
 export const UpdateStatus = buildProcedure(TestUpdateStatus, ExecuteUpdateStatus);

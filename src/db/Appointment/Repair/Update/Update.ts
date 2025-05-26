@@ -27,7 +27,7 @@ export async function ExecuteUpdateRepair(data: Data) {
 export const TestUpdateRepair = z.object({
     ...appointmentTest,
     repairID: z.string(),
-    repair: z.string().max(500).or(z.null())
+    repair: z.string().max(500).or(z.null()).optional()
 });
 
 export const UpdateRepair = buildProcedure(TestUpdateRepair, ExecuteUpdateRepair);

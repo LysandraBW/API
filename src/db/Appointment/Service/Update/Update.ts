@@ -29,9 +29,9 @@ export async function ExecuteUpdateService(data: Data) {
 export const TestUpdateService = z.object({
     ...appointmentTest,
     serviceID: isInteger,
-    service: z.string().max(50).optional(),
-    division: z.string().max(50).optional(),
-    class: z.string().max(50).optional()
+    service: z.string().max(50).or(z.null()).optional(),
+    division: z.string().max(50).or(z.null()).optional(),
+    class: z.string().max(50).or(z.null()).optional()
 });
 
 export const UpdateService = buildProcedure(TestUpdateService, ExecuteUpdateService);

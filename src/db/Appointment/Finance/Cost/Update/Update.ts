@@ -23,5 +23,5 @@ export async function ExecuteUpdateCost(data: Data) {
         return false;
     }
 }
-export const TestUpdateCost = z.object({...appointmentTest, cost: isMoney.optional()});
+export const TestUpdateCost = z.object({...appointmentTest, cost: isMoney.or(z.null()).optional()});
 export const UpdateCost = buildProcedure(TestUpdateCost, ExecuteUpdateCost);
