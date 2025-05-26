@@ -29,10 +29,10 @@ export async function ExecuteUpdateCustomer(data: Data) {
 
 export const TestUpdateCustomer = z.object({
     ...appointmentTest,
-    fName: isName.optional(),
-    lName: isName.optional(),
-    email: isEmail.optional(),
-    phone: isPhone.optional()
+    fName: isName.or(z.null()).optional(),
+    lName: isName.or(z.null()).optional(),
+    email: isEmail.or(z.null()).optional(),
+    phone: isPhone.or(z.null()).optional()
 });
 
 export const UpdateCustomer = buildProcedure(TestUpdateCustomer, ExecuteUpdateCustomer);

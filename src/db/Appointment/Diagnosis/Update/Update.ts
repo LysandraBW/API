@@ -28,8 +28,8 @@ export async function ExecuteUpdateDiagnosis(data: Data) {
 export const TestUpdateDiagnosis = z.object({
     ...appointmentTest,
     diagnosisID: z.string().max(20),
-    code: z.string().max(20).or(z.null()),
-    message: z.string().max(500).or(z.null())
+    code: z.string().max(20).or(z.null()).optional(),
+    message: z.string().max(500).or(z.null()).optional()
 });
 
 export const UpdateDiagnosis = buildProcedure(TestUpdateDiagnosis, ExecuteUpdateDiagnosis);
