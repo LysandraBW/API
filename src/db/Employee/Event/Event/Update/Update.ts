@@ -29,7 +29,7 @@ export async function ExecuteUpdateEvent(data: Data) {
 export const TestUpdateEvent = z.object({
     ...eventTest,
     name: z.string().max(100).or(z.null()).optional(),
-    date: isDate.optional(),
+    date: isDate.nullable().optional(),
     summary: z.string().max(500).or(z.null()).optional()
 });
 

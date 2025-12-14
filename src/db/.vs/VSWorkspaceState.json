@@ -6,11 +6,11 @@
     "\\Appointment\\Appointment\\Select",
     "\\Appointment\\Appointment\\Select\\All",
     "\\Appointment\\Label",
+    "\\Appointment\\Label\\Select",
     "\\Employee",
-    "\\Employee\\Event",
-    "\\Employee\\Event\\Event",
-    "\\Employee\\Event\\Event\\Select"
+    "\\Information",
+    "\\Information\\Label"
   ],
-  "SelectedNode": "\\Employee\\Event\\Event\\Select\\Select.sql",
+  "SelectedNode": "\\Appointment\\Appointment\\Select\\All\\SelectAll.sql",
   "PreviewInSolutionExplorer": false
 }
