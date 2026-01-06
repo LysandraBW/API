@@ -4,9 +4,9 @@
   "description": "An API for Waltronics",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/server.ts --poll",
-    "build": "tsc",
-    "serve": "node dist/index.js"
+    "dev": "ts-node -r tsconfig-paths/register src/server.ts --poll",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "@types/validator": "^13.12.2",
     "express": "^4.21.2",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.2"
   },

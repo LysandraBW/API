@@ -3,13 +3,14 @@
     "",
     "\\Appointment",
     "\\Appointment\\Appointment",
-    "\\Appointment\\Appointment\\Select",
-    "\\Appointment\\Appointment\\Select\\All",
-    "\\Appointment\\Appointment\\Select\\Protected",
+    "\\Appointment\\Appointment\\Insert",
+    "\\Appointment\\Note",
+    "\\Appointment\\Note\\Attachment",
     "\\Appointment\\Note\\Note",
-    "\\Appointment\\Status",
+    "\\Appointment\\Note\\Shared",
+    "\\Employee",
     "\\Role"
   ],
-  "SelectedNode": "\\Appointment\\Appointment\\Select\\Protected\\SelectProtected.sql",
+  "SelectedNode": "\\Role\\RoleStandard.sql",
   "PreviewInSolutionExplorer": false
 }

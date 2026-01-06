@@ -1,4 +1,4 @@
-import { EmployeeNote } from "@/objects/Employee/Note";
+import { EmployeeNote } from "./Note";
 import { AppointmentLabels } from "./Label";
 import { Part } from "./Part";
 import { Repair } from "./Repair";

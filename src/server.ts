@@ -78,11 +78,19 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({origin: "http://127.0.0.1:3000", credentials: true}));
 
-const port = 8080;
+const port = (process.env.PORT || 8080) as number;
 app.listen(port, () => console.log("Server Listening on Port: " + port));
 
-// Appointment
+app.get("/", async (req, res) => {
+    res.send('🚀 Server is Up and Running!');
+});
+
+// app.listen(port, '0.0.0.0', () => {
+//   console.log(`Server listening on Port ${port}`);
+// });
+
 app.get("/appointments", async (req, res) => {
+    console.log(1);
     route(req, res, SelectAllAppointments, {
         data: <Data> req.query,
         cookieNames: [["EmployeeSessionID", "sessionID"]]
