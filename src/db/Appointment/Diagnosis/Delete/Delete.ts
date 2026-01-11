@@ -2,7 +2,7 @@ import { z } from "zod";
 import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { appointmentTest } from "@/validate";
-import { isInteger } from "@/validate";
+import { isInteger } from "waltronics-types";
 import { UNDEFINED_POOL } from "@/constant";
 import { getEmployeePool } from "@/pool";
 
@@ -26,4 +26,8 @@ export async function ExecuteDeleteDiagnosis(data: Data) {
 }
 
 export const TestDeleteDiagnosis = z.object({...appointmentTest, diagnosisID: isInteger});
-export const DeleteDiagnosis = buildProcedure(TestDeleteDiagnosis, ExecuteDeleteDiagnosis);
+
+export const DeleteDiagnosis = buildProcedure(
+    TestDeleteDiagnosis, 
+    ExecuteDeleteDiagnosis
+);

@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { isUUID } from "@/validate";
+import { isUUID } from "waltronics-types";
 import { connect } from "@/utils/connect";
 import { Event } from "waltronics-types";
 

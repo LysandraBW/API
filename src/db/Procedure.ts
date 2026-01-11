@@ -1,10 +1,12 @@
 import { z } from "zod";
 
 export type Data = {[name: string]: any};
-export type TestFunction = z.ZodObject<{[name: string]: z.ZodType}, "strip", z.ZodTypeAny, {}, {}>;
+
+export type TestFunction = z.ZodObject;
 export type ExecuteFunction = (data: Data) => Promise<any>;
+
 export type Procedure = {
-    Test: (data: Data) => z.SafeParseReturnType<any, any>;
+    Test: (data: Data) => z.ZodSafeParseResult<any>;
     Execute: ExecuteFunction;
 }
 

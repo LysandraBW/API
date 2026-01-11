@@ -2,8 +2,8 @@ import { z } from "zod";
 import sql from "mssql";
 import { buildProcedure, Data } from "@/db/Procedure";
 import { getStandardPool } from "@/pool";
-import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
-import { hasLength, isEmail, isInteger, isIntegerArray, isName, isPhone, isVIN } from "@/validate";
+import { UNDEFINED_POOL } from "@/constant";
+import { hasLength, isEmail, isEmptyString, isInteger, isIntegerArray, isName, isPhone, isVIN } from "waltronics-types";
 
 export async function ExecuteInsertAppointment(data: Data): Promise<string> {
     try {
@@ -35,11 +35,25 @@ export const TestInsertAppointment = z.object({
     lName: isName,
     email: isEmail,
     phone: isPhone,
-    make: hasLength,
-    model: hasLength,
+    make: hasLength({
+        min: 1,
+        max: 50,
+        name: "make"
+    }),
+    model: hasLength({
+        min: 1,
+        max: 50,
+        name: "model"
+    }),
     modelYear: isInteger,
     services: isIntegerArray,
-    vin: isVIN.or(z.literal("")).or(z.literal(null)).optional()
+    vin: z.union([
+        isEmptyString(),
+        isVIN
+    ]).nullish()
 });
 
-export const InsertAppointment = buildProcedure(TestInsertAppointment, ExecuteInsertAppointment);
+export const InsertAppointment = buildProcedure(
+    TestInsertAppointment, 
+    ExecuteInsertAppointment
+);

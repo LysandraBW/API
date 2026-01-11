@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { eventTest } from "@/validate";
-import { isUUID } from "@/validate";
+import { isUUID } from "waltronics-types";
 
 export async function ExecuteInsertEventSharee(data: Data) {
     try {

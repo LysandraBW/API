@@ -21,5 +21,10 @@ export async function ExecuteTemporarilyDeleteAppointment(data: Data) {
         return false;
     }
 }
+
 export const TestTemporarilyDeleteAppointment = z.object(appointmentTest);
-export const TemporarilyDeleteAppointment = buildProcedure(TestTemporarilyDeleteAppointment, ExecuteTemporarilyDeleteAppointment);
+
+export const TemporarilyDeleteAppointment = buildProcedure(
+    TestTemporarilyDeleteAppointment, 
+    ExecuteTemporarilyDeleteAppointment
+);

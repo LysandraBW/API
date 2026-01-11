@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { appointmentTest, isInteger, noteTest } from "@/validate";
+import { noteTest } from "@/validate";
 import { NoteSharee } from "waltronics-types";
 
 export async function ExecuteSelectNoteSharees(data: Data): Promise<Array<NoteSharee>> {
@@ -24,5 +24,10 @@ export async function ExecuteSelectNoteSharees(data: Data): Promise<Array<NoteSh
         return [];
     }
 }
+
 export const TestSelectNoteSharees = z.object(noteTest);
-export const SelectNoteSharees = buildProcedure(TestSelectNoteSharees, ExecuteSelectNoteSharees);
+
+export const SelectNoteSharees = buildProcedure(
+    TestSelectNoteSharees, 
+    ExecuteSelectNoteSharees
+);

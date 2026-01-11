@@ -1,7 +1,7 @@
 import { z } from "zod";
 import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
-import { isUUID, isUUIDArray } from "@/validate";
+import { isUUID, isUUIDArray } from "waltronics-types";
 import { UNDEFINED_POOL } from "@/constant";
 import { getEmployeePool } from "@/pool";
 
@@ -21,5 +21,13 @@ export async function ExecuteRecoverAppointments(data: Data) {
         return false;
     }
 }
-export const TestRecoverAppointments = z.object({sessionID: isUUID, appointmentIDs: isUUIDArray});
-export const RecoverAppointments = buildProcedure(TestRecoverAppointments, ExecuteRecoverAppointments);
+
+export const TestRecoverAppointments = z.object({
+    sessionID: isUUID, 
+    appointmentIDs: isUUIDArray
+});
+
+export const RecoverAppointments = buildProcedure(
+    TestRecoverAppointments, 
+    ExecuteRecoverAppointments
+);

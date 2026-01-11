@@ -37,4 +37,8 @@ export async function ExecuteSelectEmployeeNotes(data: Data) {
     }
 }
 export const TestSelectEmployeeNotes = z.object(appointmentTest);
-export const SelectEmployeeNotes = buildProcedure(TestSelectEmployeeNotes, ExecuteSelectEmployeeNotes);
+
+export const SelectEmployeeNotes = buildProcedure(
+    TestSelectEmployeeNotes, 
+    ExecuteSelectEmployeeNotes
+);

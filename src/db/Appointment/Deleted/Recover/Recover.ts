@@ -21,5 +21,10 @@ export async function ExecuteRecoverAppointment(data: Data) {
         return false;
     }
 }
+
 export const TestRecoverAppointment = z.object(appointmentTest);
-export const RecoverAppointment = buildProcedure(TestRecoverAppointment, ExecuteRecoverAppointment);
+
+export const RecoverAppointment = buildProcedure(
+    TestRecoverAppointment, 
+    ExecuteRecoverAppointment
+);

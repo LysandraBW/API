@@ -3,15 +3,9 @@ import sql from "mssql";
 import { getEmployeePool } from "@/pool";
 import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isBit } from "@/validate";
 import { Data, buildProcedure } from "@/db/Procedure";
+import { isBit, isBody, isHead } from "waltronics-types";
 
-export const TestInsertNote = z.object({
-    ...appointmentTest,
-    head: z.string().max(100),
-    body: z.string().max(500),
-    showCustomer: isBit.transform(v => v === "1" ? 1 : 0)
-});
 
 export async function ExecuteInsertNote(data: Data): Promise<number> {
     try {
@@ -32,5 +26,13 @@ export async function ExecuteInsertNote(data: Data): Promise<number> {
         return FAILED_INSERT;
     }
 }
+
+export const TestInsertNote = z.object({
+    ...appointmentTest,
+    head: isHead,
+    body: isBody,
+    showCustomer: isBit.transform(v => v === "1" ? 1 : 0)
+});
+
 
 export const InsertNote = buildProcedure(TestInsertNote, ExecuteInsertNote);

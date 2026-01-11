@@ -21,5 +21,10 @@ export async function ExecutePDeleteAppointment(data: Data) {
         return false;
     }
 }
+
 export const TestPDeleteAppointment = z.object(appointmentTest);
-export const PermanentlyDeleteAppointment = buildProcedure(TestPDeleteAppointment, ExecutePDeleteAppointment);
+
+export const PermanentlyDeleteAppointment = buildProcedure(
+    TestPDeleteAppointment, 
+    ExecutePDeleteAppointment
+);

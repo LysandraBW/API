@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { eventTest } from "@/validate";
-import { isDate } from "@/validate";
+import { isBody, isDate, isHead } from "waltronics-types";
 
 export async function ExecuteUpdateEvent(data: Data) {
     try {
@@ -28,9 +28,9 @@ export async function ExecuteUpdateEvent(data: Data) {
 
 export const TestUpdateEvent = z.object({
     ...eventTest,
-    name: z.string().max(100).or(z.null()).optional(),
-    date: isDate.nullable().optional(),
-    summary: z.string().max(500).or(z.null()).optional()
+    name: isHead.nullish(),
+    date: isDate.nullish(),
+    summary: isBody.nullish()
 });
 
 export const UpdateEvent = buildProcedure(TestUpdateEvent, ExecuteUpdateEvent);

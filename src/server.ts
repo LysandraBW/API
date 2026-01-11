@@ -68,7 +68,8 @@ import { SelectInfoMakes } from "./db/Information/Make/Select";
 import { SelectInfoStatuses } from "./db/Information/Status/Select";
 import { SelectInfoServices } from "./db/Information/Service/Select";
 import { SelectInfoLabels } from "./db/Information/Label/Select";
-import { route, routeCRUD } from "./route";
+import { route } from "./route";
+import { routeEmployee } from "./routeEmployee";
 import { APPOINTMENT_HOLDER, EMPLOYEE } from './constant';
 import { Lookup } from "./db/Appointment/Appointment/Lookup/Lookup";
 import { SelectEmployeeNames } from "./db/Employee/Employee/Select/All/SelectAll";
@@ -173,23 +174,23 @@ app.delete("/appointment", authenticateEmployee, async (req, res) => {
 
 // Simple Updates
 app.post("/appointment/:appointmentID/date", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateDate);
+    routeEmployee(req, res, UpdateDate);
 });
 
 app.post("/appointment/:appointmentID/cost", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateCost);
+    routeEmployee(req, res, UpdateCost);
 });
 
 app.post("/appointment/:appointmentID/status", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateStatus);
+    routeEmployee(req, res, UpdateStatus);
 });
 
 app.post("/appointment/:appointmentID/vehicle", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateVehicle);
+    routeEmployee(req, res, UpdateVehicle);
 });
 
 app.post("/appointment/:appointmentID/customer", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateCustomer);
+    routeEmployee(req, res, UpdateCustomer);
 });
 
 app.post("/appointment/lookup", async (req, res) => {
@@ -211,141 +212,141 @@ app.post("/appointment/lookup", async (req, res) => {
 
 // Diagnoses
 app.get("/appointment/:appointmentID/diagnoses", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectDiagnoses);
+    routeEmployee(req, res, SelectDiagnoses);
 });
 
 app.put("/appointment/:appointmentID/diagnosis", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertDiagnosis);
+    routeEmployee(req, res, InsertDiagnosis);
 });
 
 app.post("/appointment/:appointmentID/diagnosis/:diagnosisID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateDiagnosis);
+    routeEmployee(req, res, UpdateDiagnosis);
 });
 
 app.delete("/appointment/:appointmentID/diagnosis/:diagnosisID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteDiagnosis);
+    routeEmployee(req, res, DeleteDiagnosis);
 });
 
 // Parts
 app.get("/appointment/:appointmentID/parts", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectParts);
+    routeEmployee(req, res, SelectParts);
 });
 
 app.put("/appointment/:appointmentID/part", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertPart);
+    routeEmployee(req, res, InsertPart);
 });
 
 app.post("/appointment/:appointmentID/part/:partID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdatePart);
+    routeEmployee(req, res, UpdatePart);
 });
 
 app.delete("/appointment/:appointmentID/part/:partID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeletePart);
+    routeEmployee(req, res, DeletePart);
 });
 
 // Repairs
 app.get("/appointment/:appointmentID/repairs", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectRepairs);
+    routeEmployee(req, res, SelectRepairs);
 });
 
 app.put("/appointment/:appointmentID/repair", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertRepair);
+    routeEmployee(req, res, InsertRepair);
 });
 
 app.post("/appointment/:appointmentID/repair/:repairID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateRepair);
+    routeEmployee(req, res, UpdateRepair);
 });
 
 app.delete("/appointment/:appointmentID/repair/:repairID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteRepair);
+    routeEmployee(req, res, DeleteRepair);
 });
 
 // Services
 app.get("/appointment/:appointmentID/services", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectServices);
+    routeEmployee(req, res, SelectServices);
 });
 
 app.post("/appointment/:appointmentID/service/:serviceID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateService);
+    routeEmployee(req, res, UpdateService);
 });
 
 app.delete("/appointment/:appointmentID/service/:serviceID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteService);
+    routeEmployee(req, res, DeleteService);
 });
 
 app.put("/appointment/:appointmentID/service", authenticateEmployee, async (req, res) => {
     if (req.query.type !== DEFINED)
-        routeCRUD(req, res, InsertService);
+        routeEmployee(req, res, InsertService);
     else
-        routeCRUD(req, res, InsertDefinedService);
+        routeEmployee(req, res, InsertDefinedService);
 });
 
 // Labels
 app.get("/appointment/:appointmentID/labels", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectLabels);
+    routeEmployee(req, res, SelectLabels);
 });
 
 app.post("/appointment/:appointmentID/label", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateLabel);
+    routeEmployee(req, res, UpdateLabel);
 });
 
 // Notes
 app.get("/appointment/:appointmentID/notes", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectEmployeeNotes);
+    routeEmployee(req, res, SelectEmployeeNotes);
 });
 
 app.put("/appointment/:appointmentID/note", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertNote);
+    routeEmployee(req, res, InsertNote);
 });
 
 app.post("/appointment/:appointmentID/note/:noteID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateNote);
+    routeEmployee(req, res, UpdateNote);
 });
 
 app.delete("/appointment/:appointmentID/note/:noteID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteNote);
+    routeEmployee(req, res, DeleteNote);
 });
 
 // Note Sharees
 app.get("/appointment/note/:noteID/sharees", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectNoteSharees);
+    routeEmployee(req, res, SelectNoteSharees);
 });
 
 app.put("/appointment/note/:noteID/sharee", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertNoteSharee);
+    routeEmployee(req, res, InsertNoteSharee);
 });
 
 app.delete("/appointment/note/:noteID/sharee", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteNoteSharee);
+    routeEmployee(req, res, DeleteNoteSharee);
 });
 
 // Note Attachments
 app.put("/appointment/note/:noteID/attachment", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertNoteAttachment);
+    routeEmployee(req, res, InsertNoteAttachment);
 });
 
 app.delete("/appointment/note/:noteID/attachment/:attachmentID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteNoteAttachment);
+    routeEmployee(req, res, DeleteNoteAttachment);
 });
 
 // Payments
 app.get("/appointment/:appointmentID/payments", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectPayments);
+    routeEmployee(req, res, SelectPayments);
 });
 
 app.put("/appointment/:appointmentID/payment", authenticateEmployee, async (req, res) => {
     if (req.query.type === DIGITAL) 
-        routeCRUD(req, res, InsertDigitalPayment);
+        routeEmployee(req, res, InsertDigitalPayment);
     else 
-        routeCRUD(req, res, InsertPayment);
+        routeEmployee(req, res, InsertPayment);
 });
 
 app.put("/appointment/:appointmentID/payment/:paymentID/credit", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertCreditCard);
+    routeEmployee(req, res, InsertCreditCard);
 });
 
 app.delete("/appointment/:appointmentID/payment/:paymentID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeletePayment);
+    routeEmployee(req, res, DeletePayment);
 });
 
 // Employee
@@ -355,11 +356,13 @@ app.post("/employee/login", async (req, res) => {
         res.status(400).send(INVALID_BODY);
         return;
     }
+    
     const output = await EmployeeLogin.Execute(input.data);
     if (!output) {
         res.status(400).send(INVALID_LOGIN);
         return;
     }
+
     setCookie(res, {data: output, name: "EmployeeSessionID"});
     res.send({output});
 });
@@ -371,50 +374,52 @@ app.post("/employee/logout", async (req, res) => {
         res.status(400).send(INVALID_BODY);
         return;
     }
+
     const output = await EmployeeLogout.Execute(input.data);
     if (!output) {
         res.status(400).send(INVALID_BODY);
         return;
     }
+
     res.clearCookie("EmployeeSessionID");
     res.send({output: "Employee Logged Out"});
 });
 
 app.get("/employee", authenticateEmployee, async (req, res) => {
     if (req.query.type === NAMES)
-        routeCRUD(req, res, SelectEmployeeNames, true);
+        routeEmployee(req, res, SelectEmployeeNames, true);
     else
-        routeCRUD(req, res, SelectEmployee);
+        routeEmployee(req, res, SelectEmployee);
 });
 
 // Employee Event
 app.get("/employee/events", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectEvents);
+    routeEmployee(req, res, SelectEvents);
 });
 
 app.put("/employee/event", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertEvent);
+    routeEmployee(req, res, InsertEvent);
 });
 
 app.post("/employee/event/:eventID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, UpdateEvent);
+    routeEmployee(req, res, UpdateEvent);
 });
 
 app.delete("/employee/event/:eventID", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteEvent);
+    routeEmployee(req, res, DeleteEvent);
 });
 
 // Employee Event Sharee(s)
 app.get("/employee/event/:eventID/sharees", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, SelectEventSharees);
+    routeEmployee(req, res, SelectEventSharees);
 });
 
 app.put("/employee/event/:eventID/sharee", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, InsertEventSharee);
+    routeEmployee(req, res, InsertEventSharee);
 });
 
 app.delete("/employee/event/:eventID/sharee", authenticateEmployee, async (req, res) => {
-    routeCRUD(req, res, DeleteEventSharee);
+    routeEmployee(req, res, DeleteEventSharee);
 });
 
 // Information

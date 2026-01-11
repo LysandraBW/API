@@ -3,7 +3,8 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { appointmentTest, isInteger } from "@/validate";
+import { appointmentTest} from "@/validate";
+import { isClass, isDivision, isID, isService } from "waltronics-types";
 
 export async function ExecuteUpdateService(data: Data) {
     try {
@@ -28,10 +29,10 @@ export async function ExecuteUpdateService(data: Data) {
 
 export const TestUpdateService = z.object({
     ...appointmentTest,
-    serviceID: isInteger,
-    service: z.string().max(50).or(z.null()).optional(),
-    division: z.string().max(50).or(z.null()).optional(),
-    class: z.string().max(50).or(z.null()).optional()
+    serviceID: isID,
+    service: isService.nullish(),
+    division: isDivision.nullish(),
+    class: isClass.nullish()
 });
 
 export const UpdateService = buildProcedure(TestUpdateService, ExecuteUpdateService);

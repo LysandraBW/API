@@ -21,5 +21,13 @@ export async function ExecuteLogin(data: Data): Promise<string> {
         return "";
     }
 }
-export const TestLogin = z.object({username: z.string().max(50), password: z.string().max(50)});
-export const EmployeeLogin = buildProcedure(TestLogin, ExecuteLogin);
+
+export const TestLogin = z.object({
+    username: z.string().max(50), 
+    password: z.string().max(50)
+});
+
+export const EmployeeLogin = buildProcedure(
+    TestLogin, 
+    ExecuteLogin
+);

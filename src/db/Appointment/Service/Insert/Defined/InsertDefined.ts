@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isInteger } from "@/validate";
+import { isID } from "waltronics-types";
 
 export async function ExecuteInsertDefinedService(data: Data): Promise<number> {
     try {
@@ -23,5 +23,5 @@ export async function ExecuteInsertDefinedService(data: Data): Promise<number> {
         return FAILED_INSERT;
     }
 }
-export const TestInsertDefinedService = z.object({...appointmentTest, serviceID: isInteger});
+export const TestInsertDefinedService = z.object({...appointmentTest, serviceID: isID});
 export const InsertDefinedService = buildProcedure(TestInsertDefinedService, ExecuteInsertDefinedService);

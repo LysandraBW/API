@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { noteTest } from "@/validate";
-import { isUUID } from "@/validate";
+import { isUUID } from "waltronics-types";
 
 export async function ExecuteInsertNoteSharee(data: Data) {
     try {
@@ -25,5 +25,13 @@ export async function ExecuteInsertNoteSharee(data: Data) {
         return false;
     }
 }
-export const TestInsertNoteSharee = z.object({...noteTest, noteShareeID: isUUID});
-export const InsertNoteSharee = buildProcedure(TestInsertNoteSharee, ExecuteInsertNoteSharee);
+
+export const TestInsertNoteSharee = z.object({
+    ...noteTest, 
+    noteShareeID: isUUID
+});
+
+export const InsertNoteSharee = buildProcedure(
+    TestInsertNoteSharee, 
+    ExecuteInsertNoteSharee
+);

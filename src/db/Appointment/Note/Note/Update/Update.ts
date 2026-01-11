@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { noteTest } from "@/validate";
-import { isBit } from "@/validate";
+import { isBit, isBody, isHead } from "waltronics-types";
 
 export async function ExecuteUpdateNote(data: Data) {
     try {
@@ -29,9 +29,12 @@ export async function ExecuteUpdateNote(data: Data) {
 
 export const TestUpdateNote = z.object({
     ...noteTest,
-    head: z.string().max(100).or(z.null()).optional(),
-    body: z.string().max(500).or(z.null()).optional(),
+    head: isHead.nullish(),
+    body: isBody.nullish(),
     showCustomer: isBit.optional()
 });
 
-export const UpdateNote = buildProcedure(TestUpdateNote, ExecuteUpdateNote);
+export const UpdateNote = buildProcedure(
+    TestUpdateNote, 
+    ExecuteUpdateNote
+);

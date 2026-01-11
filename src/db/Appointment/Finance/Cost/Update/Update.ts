@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isMoney } from "@/validate";
+import { isMoney } from "waltronics-types";
 
 export async function ExecuteUpdateCost(data: Data) {
     try {
@@ -23,5 +23,12 @@ export async function ExecuteUpdateCost(data: Data) {
         return false;
     }
 }
-export const TestUpdateCost = z.object({...appointmentTest, cost: isMoney.or(z.null()).optional()});
-export const UpdateCost = buildProcedure(TestUpdateCost, ExecuteUpdateCost);
+export const TestUpdateCost = z.object({
+    ...appointmentTest, 
+    cost: isMoney.nullish()
+});
+
+export const UpdateCost = buildProcedure(
+    TestUpdateCost, 
+    ExecuteUpdateCost
+);

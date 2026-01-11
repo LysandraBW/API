@@ -3,7 +3,7 @@ import sql from "mssql";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { noteTest } from "@/validate";
-import { isInteger } from "@/validate";
+import { isInteger } from "waltronics-types";
 import { Data, buildProcedure } from "@/db/Procedure";
 
 export async function ExecuteDeleteNoteAttachment(data: Data) {
@@ -23,5 +23,6 @@ export async function ExecuteDeleteNoteAttachment(data: Data) {
         return false;
     }
 }
+
 export const TestDeleteNoteAttachment = z.object({...noteTest, attachmentID: isInteger});
 export const DeleteNoteAttachment = buildProcedure(TestDeleteNoteAttachment, ExecuteDeleteNoteAttachment);

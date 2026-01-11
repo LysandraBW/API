@@ -32,4 +32,7 @@ export async function ExecuteInsertNoteAttachment(data: Data): Promise<number> {
     }
 }
 
-export const InsertNoteAttachment = buildProcedure(TestInsertNoteAttachment, ExecuteInsertNoteAttachment);
+export const InsertNoteAttachment = buildProcedure(
+    TestInsertNoteAttachment, 
+    ExecuteInsertNoteAttachment
+);

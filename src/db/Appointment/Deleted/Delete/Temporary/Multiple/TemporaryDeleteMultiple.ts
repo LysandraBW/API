@@ -1,7 +1,7 @@
 import { z } from "zod";
 import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
-import { isUUID, isUUIDArray } from "@/validate";
+import { isUUID, isUUIDArray } from "waltronics-types";
 import { UNDEFINED_POOL } from "@/constant";
 import { getEmployeePool } from "@/pool";
 

@@ -3,7 +3,7 @@ import sql from "mssql";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isEmail, isName, isPhone } from "@/validate";
+import { isEmail, isName, isPhone } from "waltronics-types";
 import { buildProcedure, Data } from "../../Procedure";
 
 export async function ExecuteUpdateCustomer(data: Data) {
@@ -29,10 +29,10 @@ export async function ExecuteUpdateCustomer(data: Data) {
 
 export const TestUpdateCustomer = z.object({
     ...appointmentTest,
-    fName: isName.or(z.null()).optional(),
-    lName: isName.or(z.null()).optional(),
-    email: isEmail.or(z.null()).optional(),
-    phone: isPhone.or(z.null()).optional()
+    fName: isName.nullish(),
+    lName: isName.nullish(),
+    email: isEmail.nullish(),
+    phone: isPhone.nullish()
 });
 
 export const UpdateCustomer = buildProcedure(TestUpdateCustomer, ExecuteUpdateCustomer);

@@ -24,7 +24,7 @@ export async function ExecuteSelectAppointment(data: Data): Promise<Appointment|
         // selected in the prior proecdure.
         // This is stored in an array.
         const recordsets: any = output.recordsets;
-
+        console.log(output.recordset);
         // The notes and note attachments are
         // returned separately. Here, we're
         // linking them together (ease of use).
@@ -59,4 +59,8 @@ export async function ExecuteSelectAppointment(data: Data): Promise<Appointment|
 }
 
 export const TestSelectAppointment = z.object(appointmentTest);
-export const SelectAppointment = buildProcedure(TestSelectAppointment, ExecuteSelectAppointment);
+
+export const SelectAppointment = buildProcedure(
+    TestSelectAppointment, 
+    ExecuteSelectAppointment
+);

@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
-import { isDate, isUUID } from "@/validate";
+import { isBody, isDate, isHead, isUUID } from "waltronics-types";
 
 export async function ExecuteInsertEvent(data: Data): Promise<number> {
     try {
@@ -26,9 +26,9 @@ export async function ExecuteInsertEvent(data: Data): Promise<number> {
 
 export const TestInsertEvent = z.object({
     sessionID: isUUID,
-    name: z.string().max(100),
+    name: isHead,
     date: isDate,
-    summary: z.string().max(500)
+    summary: isBody
 });
 
 export const InsertEvent = buildProcedure(TestInsertEvent, ExecuteInsertEvent);

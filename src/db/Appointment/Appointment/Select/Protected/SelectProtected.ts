@@ -11,10 +11,12 @@ export async function ExecuteSelectProtectedAppointment(data: Data) {
         const pool = await getPool(data.sessionID, data.role as Role);
         if (!pool)
             throw UNDEFINED_POOL;
+
         const output: any = await pool.request()
             .input("SessionID", data.sessionID)
             .input("AppointmentID", sql.UniqueIdentifier, data.appointmentID)
             .execute("Appointment.GetProtected")
+        
         return {
             ...output.recordsets[0][0],
             Services: output.recordsets[1],
@@ -31,7 +33,13 @@ export async function ExecuteSelectProtectedAppointment(data: Data) {
 
 export const TestSelectProtectedAppointment = z.object({
     ...appointmentTest,
-    role: z.string().refine(s => [APPOINTMENT_HOLDER, EMPLOYEE].indexOf(s) !== -1)
+    role: z.enum([
+        APPOINTMENT_HOLDER, 
+        EMPLOYEE
+    ])
 });
 
-export const SelectProtectedAppointment = buildProcedure(TestSelectProtectedAppointment, ExecuteSelectProtectedAppointment);
+export const SelectProtectedAppointment = buildProcedure(
+    TestSelectProtectedAppointment, 
+    ExecuteSelectProtectedAppointment
+);

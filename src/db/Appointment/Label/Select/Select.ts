@@ -12,12 +12,15 @@ export async function ExecuteSelectLabels(data: Data): Promise<AppointmentLabels
         const pool = await getEmployeePool(data.sessionID);
         if (!pool)
             throw UNDEFINED_POOL;
+        
         const output = await pool.request()
             .input("SessionID", sql.Char(36), data.sessionID)
             .input("AppointmentID", sql.UniqueIdentifier, data.appointmentID)
             .execute("Appointment.GetLabels");
-        const labels = output.recordset;
+        
+            const labels = output.recordset;
         const structuredLabels = structure(labels, "LabelID");
+
         return structuredLabels;
     }
     catch (err) {
@@ -25,5 +28,10 @@ export async function ExecuteSelectLabels(data: Data): Promise<AppointmentLabels
         return null;
     }
 }
+
 export const TestSelectLabels = z.object(appointmentTest);
-export const SelectLabels = buildProcedure(TestSelectLabels, ExecuteSelectLabels);
+
+export const SelectLabels = buildProcedure(
+    TestSelectLabels, 
+    ExecuteSelectLabels
+);

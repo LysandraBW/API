@@ -22,5 +22,10 @@ export async function ExecuteSelectPayments(data: Data): Promise<Array<Payment>>
         return [];
     }
 }
+
 export const TestSelectPayments = z.object(appointmentTest);
-export const SelectPayments = buildProcedure(TestSelectPayments, ExecuteSelectPayments);
+
+export const SelectPayments = buildProcedure(
+    TestSelectPayments, 
+    ExecuteSelectPayments
+);

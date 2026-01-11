@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isInteger, isMoney } from "@/validate";
+import { isInteger, isMoney, isPartName, isPartNumber } from "waltronics-types";
 
 export async function ExecuteInsertPart(data: Data): Promise<number> {
     try {
@@ -29,8 +29,8 @@ export async function ExecuteInsertPart(data: Data): Promise<number> {
 
 export const TestInsertPart = z.object({
     ...appointmentTest,
-    partName: z.string().max(50),
-    partNumber: z.string().max(50),
+    partName: isPartName,
+    partNumber: isPartNumber,
     quantity: isInteger,
     unitCost: isMoney
 });

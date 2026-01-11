@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { isUUID } from "@/validate";
+import { isUUID } from "waltronics-types";
 
 export async function ExecuteLogout(data: Data) {
     try {

@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isInteger } from "@/validate";
+import { isCreditCardNumber, isCreditCardType, isExpirationDate, isInteger, isName } from "waltronics-types";
 
 export async function ExecuteInsertCreditCard(data: Data) {
     try {
@@ -31,10 +31,13 @@ export async function ExecuteInsertCreditCard(data: Data) {
 export const TestInsertCreditCard = z.object({
     ...appointmentTest,
     paymentID: isInteger,
-    name: z.string().max(100),
-    type: z.string().max(10),
-    ccn: z.string().min(15).max(16),
-    exp: z.string().length(4)
+    name: isName,
+    type: isCreditCardType,
+    ccn: isCreditCardNumber,
+    exp: isExpirationDate
 });
 
-export const InsertCreditCard = buildProcedure(TestInsertCreditCard, ExecuteInsertCreditCard);
+export const InsertCreditCard = buildProcedure(
+    TestInsertCreditCard, 
+    ExecuteInsertCreditCard
+);

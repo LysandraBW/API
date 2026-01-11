@@ -4,13 +4,14 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { FAILED_INSERT, UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isMoney } from "@/validate";
+import { isCreditCardNumber, isCreditCardType, isExpirationDate, isMoney, isName } from "waltronics-types";
 
 export async function ExecuteInsertDigitalPayment(data: Data): Promise<number> {
     try {
         const pool = await getEmployeePool(data.sessionID);
         if (!pool)
             throw UNDEFINED_POOL;
+        
         const output = await pool.request()
             .input('SessionID', sql.Char(36), data.sessionID)
             .input('AppointmentID', sql.UniqueIdentifier, data.appointmentID)
@@ -21,7 +22,8 @@ export async function ExecuteInsertDigitalPayment(data: Data): Promise<number> {
             .input('EXP', sql.Char(4), data.exp)
             .output('PaymentID', sql.Int)
             .execute('Appointment.InsertDigitalPayment');
-        return output.output.PaymentID;
+        
+            return output.output.PaymentID;
     }
     catch (err) {
         console.error(err);
@@ -32,10 +34,13 @@ export async function ExecuteInsertDigitalPayment(data: Data): Promise<number> {
 export const TestInsertDigitalPayment = z.object({
     ...appointmentTest,
     payment: isMoney,
-    name: z.string().max(100),
-    type: z.string().max(10),
-    ccn: z.string().min(15).max(16),
-    exp: z.string().length(4)
+    name: isName,
+    type: isCreditCardType,
+    ccn: isCreditCardNumber,
+    exp: isExpirationDate
 });
 
-export const InsertDigitalPayment = buildProcedure(TestInsertDigitalPayment, ExecuteInsertDigitalPayment);
+export const InsertDigitalPayment = buildProcedure(
+    TestInsertDigitalPayment, 
+    ExecuteInsertDigitalPayment
+);

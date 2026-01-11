@@ -3,7 +3,9 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { appointmentTest, isVIN } from "@/validate";
+import { appointmentTest } from "@/validate";
+import { hasLength, isInteger, isIntegerArray, isVIN } from "waltronics-types";
+import { isLicensePlate } from "validator";
 
 export async function ExecuteUpdateVehicle(data: Data) {
     try {
@@ -30,12 +32,28 @@ export async function ExecuteUpdateVehicle(data: Data) {
 
 export const TestUpdateVehicle = z.object({
     ...appointmentTest,
-    make: z.string().max(50).or(z.null()).optional(),
-    model: z.string().max(50).or(z.null()).optional(),
-    modelYear: z.string().or(z.null()).optional(),
-    vin: isVIN.or(z.null()).optional(),
-    mileage: z.string().or(z.null()).optional(),
-    licensePlate: z.string().max(8).or(z.null()).optional()
+    make: hasLength({
+        min: 1,
+        max: 50,
+        name: "make"
+    }),
+    model: hasLength({
+        min: 1,
+        max: 50,
+        name: "model"
+    }),
+    modelYear: isInteger.nullish(),
+    services: isIntegerArray.nullish(),
+    vin: isVIN.nullish(),
+    mileage: isInteger.nullish(),
+    licensePlate: hasLength({
+        min: 2,
+        max: 8,
+        name: "license plate"
+    }).nullish(),
 });
 
-export const UpdateVehicle = buildProcedure(TestUpdateVehicle, ExecuteUpdateVehicle);
+export const UpdateVehicle = buildProcedure(
+    TestUpdateVehicle, 
+    ExecuteUpdateVehicle
+);

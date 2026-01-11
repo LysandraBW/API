@@ -19,7 +19,7 @@ const CONFIG = (login: string[]) => ({
     database:   ENV.DB,
     server:     ENV.DB_Host,
     options: {
-        encrypt: true,
+        encrypt: false,
         trustServerCertificate: false
     }
 });
@@ -66,13 +66,3 @@ export const getAppointmentHolderPool = async (sessionID: string) => {
         return StandardPool;
     return AppointmentHolderPool;
 }
-
-// These will be commented out as the naming created ambiguity.
-// There's also not an actual "Customer" yet, so it's not smart
-// to have this.
-// const CustomerPool = (new sql.ConnectionPool(CONFIG(ENV.Login.Customer))).connect();
-// export const getCustomerPool = async (sessionID: string) => {
-//     if (!(await authenticate(sessionID, "Appointment")))
-//         return StandardPool;
-//     return CustomerPool;
-// }

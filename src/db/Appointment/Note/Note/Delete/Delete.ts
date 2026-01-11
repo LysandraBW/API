@@ -4,7 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { appointmentTest } from "@/validate";
 import { UNDEFINED_POOL } from "@/constant";
 import { getEmployeePool } from "@/pool";
-import { isInteger } from "@/validate";
+import { isInteger } from "waltronics-types";
 
 export async function ExecuteDeleteNote(data: Data) {
     try {
@@ -25,5 +25,9 @@ export async function ExecuteDeleteNote(data: Data) {
         return false;
     }
 }
-export const TestDeleteNote = z.object({...appointmentTest, noteID: isInteger});
+export const TestDeleteNote = z.object({
+    ...appointmentTest, 
+    noteID: isInteger
+});
+
 export const DeleteNote = buildProcedure(TestDeleteNote, ExecuteDeleteNote);

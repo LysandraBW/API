@@ -21,5 +21,6 @@ export async function ExecuteDeleteEvent(data: Data) {
         return false;
     }
 }
+
 export const TestDeleteEvent = z.object(eventTest);
 export const DeleteEvent = buildProcedure(TestDeleteEvent, ExecuteDeleteEvent);

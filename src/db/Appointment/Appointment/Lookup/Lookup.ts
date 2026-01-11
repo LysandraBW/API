@@ -1,6 +1,6 @@
 import { z } from "zod";
 import sql from "mssql";
-import { isUUID, isEmail } from "@/validate";
+import { isUUID, isEmail } from "waltronics-types";
 import { UNDEFINED_POOL } from "@/constant";
 import { getStandardPool } from "@/pool";
 import { Data, buildProcedure } from "@/db/Procedure";
@@ -24,5 +24,13 @@ export async function ExecuteLookup(data: Data): Promise<string> {
         return "";
     }
 }
-export const TestLookup = z.object({appointmentID: isUUID, email: isEmail});
-export const Lookup = buildProcedure(TestLookup, ExecuteLookup);
+
+export const TestLookup = z.object({
+    appointmentID: isUUID, 
+    email: isEmail
+});
+
+export const Lookup = buildProcedure(
+    TestLookup, 
+    ExecuteLookup
+);

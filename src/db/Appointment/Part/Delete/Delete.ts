@@ -2,7 +2,7 @@ import { z } from "zod";
 import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { appointmentTest } from "@/validate";
-import { isInteger } from "@/validate";
+import { isInteger } from "waltronics-types";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 
@@ -23,5 +23,6 @@ export async function ExecuteDeletePart(data: Data) {
         return false;
     }
 } 
+
 export const TestDeletePart = z.object({...appointmentTest, partID: isInteger});
 export const DeletePart = buildProcedure(TestDeletePart, ExecuteDeletePart);

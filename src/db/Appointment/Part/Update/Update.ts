@@ -4,7 +4,8 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isInteger, isMoney } from "@/validate";
+import { isInteger, isMoney } from "waltronics-types";
+import { isID, isPartName, isPartNumber } from "waltronics-types";
 
 
 export async function ExecuteUpdatePart(data: Data) {
@@ -31,11 +32,11 @@ export async function ExecuteUpdatePart(data: Data) {
 
 export const TestUpdatePart = z.object({
     ...appointmentTest,
-    partID: z.string(),
-    partName: z.string().max(50).or(z.null()).optional(),
-    partNumber: z.string().max(50).or(z.null()).optional(),
-    quantity: isInteger.or(z.null()).optional(),
-    unitCost: isMoney.or(z.null()).optional()
+    partID: isID,
+    partName: isPartName.nullish(),
+    partNumber: isPartNumber.nullish(),
+    quantity: isInteger.nullish(),
+    unitCost: isMoney.nullish()
 });
 
 export const UpdatePart = buildProcedure(TestUpdatePart, ExecuteUpdatePart);

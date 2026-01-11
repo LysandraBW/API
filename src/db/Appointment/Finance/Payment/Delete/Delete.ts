@@ -3,8 +3,8 @@ import sql from "mssql";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
-import { isInteger } from "@/validate";
 import { Data, buildProcedure } from "@/db/Procedure";
+import { isID } from "waltronics-types";
 
 export async function ExecuteDeletePayment(data: Data) {
     try {
@@ -23,5 +23,13 @@ export async function ExecuteDeletePayment(data: Data) {
         return false;
     }
 }
-export const TestDeletePayment = z.object({...appointmentTest, paymentID: isInteger});
-export const DeletePayment = buildProcedure(TestDeletePayment, ExecuteDeletePayment);
+
+export const TestDeletePayment = z.object({
+    ...appointmentTest, 
+    paymentID: isID
+});
+
+export const DeletePayment = buildProcedure(
+    TestDeletePayment, 
+    ExecuteDeletePayment
+);

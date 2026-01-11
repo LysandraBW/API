@@ -4,6 +4,7 @@ import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
 import { appointmentTest } from "@/validate";
+import { isID, isRepair } from "waltronics-types";
 
 export async function ExecuteUpdateRepair(data: Data) {
     try {
@@ -26,8 +27,8 @@ export async function ExecuteUpdateRepair(data: Data) {
 
 export const TestUpdateRepair = z.object({
     ...appointmentTest,
-    repairID: z.string(),
-    repair: z.string().max(500).or(z.null()).optional()
+    repairID: isID,
+    repair: isRepair.nullish()
 });
 
 export const UpdateRepair = buildProcedure(TestUpdateRepair, ExecuteUpdateRepair);

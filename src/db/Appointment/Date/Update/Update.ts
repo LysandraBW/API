@@ -1,10 +1,10 @@
 import { z } from "zod";
 import sql from "mssql";
-import { appointmentTest, isString } from "@/validate";
-import { isDate } from "@/validate";
+import { appointmentTest } from "@/validate";
 import { UNDEFINED_POOL } from "@/constant";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
+import { isDate } from "waltronics-types";
 
 export async function ExecuteUpdateDate(data: Data) {
     try {
@@ -27,8 +27,11 @@ export async function ExecuteUpdateDate(data: Data) {
 
 export const TestUpdateDate = z.object({
     ...appointmentTest,
-    endDate: isDate.or(z.null()),
-    startDate: isDate.or(z.null())
+    endDate: isDate.nullish(),
+    startDate: isDate.nullish()
 });
 
-export const UpdateDate = buildProcedure(TestUpdateDate, ExecuteUpdateDate);
+export const UpdateDate = buildProcedure(
+    TestUpdateDate, 
+    ExecuteUpdateDate
+);

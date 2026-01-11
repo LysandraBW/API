@@ -11,10 +11,12 @@ export async function ExecuteSelectRepairs(data: Data): Promise<Array<Repair>> {
         const pool = await getEmployeePool(data.sessionID);
         if (!pool)
             throw UNDEFINED_POOL;
+
         const output = await pool.request()
             .input('SessionID', sql.Char(36), data.sessionID)
             .input('AppointmentID', sql.UniqueIdentifier, data.appointmentID)
             .execute('Appointment.GetRepairs');
+        
         return output.recordset;
     }
     catch (err) {
@@ -22,5 +24,10 @@ export async function ExecuteSelectRepairs(data: Data): Promise<Array<Repair>> {
         return [];
     }
 }
+
 export const TestSelectRepairs = z.object(appointmentTest);
-export const SelectRepairs = buildProcedure(TestSelectRepairs, ExecuteSelectRepairs)
+
+export const SelectRepairs = buildProcedure(
+    TestSelectRepairs, 
+    ExecuteSelectRepairs
+);

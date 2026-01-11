@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { isBit, isUUID } from "@/validate";
+import { isBit, isUUID } from "waltronics-types";
 import { EmployeeFullName } from "waltronics-types";
 
 export async function ExecuteSelectAllEmployeeFullNames(data: Data): Promise<Array<EmployeeFullName>> {

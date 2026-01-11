@@ -3,7 +3,7 @@ import sql from "mssql";
 import { Data, buildProcedure } from "@/db/Procedure";
 import { getEmployeePool } from "@/pool";
 import { UNDEFINED_POOL } from "@/constant";
-import { isUUID, isUUIDArray } from "@/validate";
+import { isUUID, isUUIDArray } from "waltronics-types";
 
 export async function ExecutePermanentlyDeleteAppointments(data: Data) {
     try {
