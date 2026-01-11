@@ -33,12 +33,10 @@ export async function ExecuteUpdateVehicle(data: Data) {
 export const TestUpdateVehicle = z.object({
     ...appointmentTest,
     make: hasLength({
-        min: 1,
         max: 50,
         name: "make"
     }),
     model: hasLength({
-        min: 1,
         max: 50,
         name: "model"
     }),
@@ -47,7 +45,6 @@ export const TestUpdateVehicle = z.object({
     vin: isVIN.nullish(),
     mileage: isInteger.nullish(),
     licensePlate: hasLength({
-        min: 2,
         max: 8,
         name: "license plate"
     }).nullish(),

@@ -36,12 +36,10 @@ export const TestInsertAppointment = z.object({
     email: isEmail,
     phone: isPhone,
     make: hasLength({
-        min: 1,
         max: 50,
         name: "make"
     }),
     model: hasLength({
-        min: 1,
         max: 50,
         name: "model"
     }),
