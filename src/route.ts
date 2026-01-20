@@ -14,7 +14,6 @@ export async function route(req: Request, res: Response, procedure: Procedure, o
     
     // Send Error
     if (!input.success) {
-        console.log(JSON.stringify(input.error));
         res.status(400).send(INVALID_BODY);
         return;
     }

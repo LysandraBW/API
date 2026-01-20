@@ -1,7 +1,7 @@
 export const FAILED_INSERT = -1;
 
-export const INVALID_BODY = JSON.stringify({"error": 
-    "Invalid Body"
+export const INVALID_BODY = JSON.stringify({
+    "error": "Invalid Body"
 });
 
 export const INVALID_LOGIN = JSON.stringify({

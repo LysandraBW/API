@@ -12,3 +12,10 @@ export const setCookie = async (
     const token = jwt.sign(cookie.data, process.env.ATS || '');
     res.cookie(cookie.name, token, {maxAge: 9000000, httpOnly: false, secure: true, sameSite: "none", path: "/"});
 }
+
+export const deleteCookie = async (
+    res: Response,
+    cookieName: string
+): Promise<void> => {
+    res.clearCookie(cookieName, {maxAge: 9000000, httpOnly: false, secure: true, sameSite: "none", path: "/"});
+}

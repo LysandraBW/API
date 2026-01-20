@@ -14,7 +14,6 @@ export async function routeEmployee(req: Request, res: Response, procedure: Proc
 
     // Send 400
     if (!input.success) {
-        console.log(JSON.stringify(input.error));
         res.status(400).send(INVALID_BODY);
         return;
     }

@@ -12,7 +12,7 @@ export async function cookiesFromRequest(req: Request, cookieNames?: Array<[stri
     for (const cookieName of cookieNames) {
         const cookieKey = cookieName[cookieName.length - 1];
         const cookieValue = await getCookie(req, cookieName[0]);
-
+        
         if (cookieValue === null)
             continue;
 

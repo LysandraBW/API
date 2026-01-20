@@ -17,7 +17,7 @@ import { TemporarilyDeleteAppointment } from "./db/Appointment/Deleted/Delete/Te
 import authenticateEmployee from "./middleware";
 import { UpdateCost } from "./db/Appointment/Finance/Cost/Update/Update";
 import { EmployeeLogin } from "./db/Employee/Login/Login/Login";
-import { setCookie } from "./utils/setCookie";
+import { deleteCookie, setCookie } from "./utils/setCookie";
 import { EmployeeLogout } from "./db/Employee/Login/Logout/Logout";
 import { UpdateStatus } from "./db/Appointment/Status/Update/Update";
 import { UpdateVehicle } from "./db/Appointment/Vehicle/Update/Update";
@@ -79,7 +79,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     origin: [
-        "http://127.0.0.1:3000",
+        // "http://127.0.0.1:3000",
         "https://waltronics.vercel.app"
     ],
     credentials: true
@@ -197,17 +197,19 @@ app.post("/appointment/lookup", async (req, res) => {
     const input = Lookup.Test(req.body);
     // Invalid Inputs (e.g. Wrong Email Address)
     if (!input.success) {
+        await deleteCookie(res, "AppointmentHolderSessionID");
         res.status(400).send(INVALID_BODY);
         return;
     }
     // Invalid Email Address and Appointment ID
     const output = await Lookup.Execute(input.data);
     if (!output) {
+        await deleteCookie(res, "AppointmentHolderSessionID");
         res.status(400).send(INVALID_LOGIN);
         return;
     }
     await setCookie(res, {data: output, name: "AppointmentHolderSessionID"});
-    res.send({output});
+    res.status(200).send(JSON.stringify(output));
 });
 
 // Diagnoses
@@ -364,12 +366,13 @@ app.post("/employee/login", async (req, res) => {
     }
 
     setCookie(res, {data: output, name: "EmployeeSessionID"});
-    res.send({output});
+    res.status(200).send(JSON.stringify(output));
 });
 
 app.post("/employee/logout", async (req, res) => {
     const sessionID = await getCookie(req, "EmployeeSessionID");
     const input = EmployeeLogout.Test({sessionID});
+    
     if (!input.success) {
         res.status(400).send(INVALID_BODY);
         return;
@@ -382,7 +385,7 @@ app.post("/employee/logout", async (req, res) => {
     }
 
     res.clearCookie("EmployeeSessionID");
-    res.send({output: "Employee Logged Out"});
+    res.status(200).send();
 });
 
 app.get("/employee", authenticateEmployee, async (req, res) => {
