@@ -19,8 +19,8 @@ const CONFIG = (login: string[]) => ({
     database:   ENV.DB,
     server:     ENV.DB_Host,
     options: {
-        encrypt: true,
-        trustServerCertificate: false
+        encrypt: false,
+        trustServerCertificate: true
     }
 });
 

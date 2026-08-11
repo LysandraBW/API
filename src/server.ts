@@ -79,8 +79,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     origin: [
-        // "http://127.0.0.1:3000",
-        "https://waltronics.vercel.app"
+        "http://127.0.0.1:3000",
+        // "https://waltronics.vercel.app"
     ],
     credentials: true
 }));
